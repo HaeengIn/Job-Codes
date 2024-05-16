@@ -47,10 +47,11 @@ def main():
     if a == "Options":
         options()
     if a == "Exit":
-        exit = input("Exit Program?(y/n) ")
-        if exit == "y":
+        c = input("Exit Program?(y/n) ")
+        if c == "y":
+            print("Program Stopped")
             exit()
-        if exit == "n":
+        if c == "n":
             main()
         else:
             print("Invalid Input")
