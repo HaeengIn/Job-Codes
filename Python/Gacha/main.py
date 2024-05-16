@@ -4,7 +4,6 @@ student = ""
 num = ""
 restart = ""
 
-
 def again():
     restart = input("Restart?(y/n) ")
     if restart == "y":
@@ -33,6 +32,7 @@ def options():
     print("Fix / Back")
     b = input("")
     if b == "Fix":
+        global student
         student = int(input("Fix Last Number: "))
         print("Last Number Fixed")
         main()
