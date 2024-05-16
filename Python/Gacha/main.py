@@ -10,12 +10,10 @@ def again():
     if restart == "y":
         run()
     if restart == "n":
-        print("Stopping Program...")
-        exit()
+        main()
     else:
         print("Invalid Input")
-
-
+        
 def run():
     while True:
         global student
@@ -31,5 +29,33 @@ def run():
             print(num)
             again()
 
-
-run()
+def options():
+    print("Fix / Back")
+    b = input("")
+    if b == "Fix":
+        student = int(input("Fix Last Number: "))
+        print("Last Number Fixed")
+        main()
+    if b == "Back":
+        main()
+    
+def main():
+    print("Start / Options / Exit")
+    a = input()
+    if a == "Start":
+        run()
+    if a == "Options":
+        options()
+    if a == "Exit":
+        exit = input("Exit Program?(y/n) ")
+        if exit == "y":
+            exit()
+        if exit == "n":
+            main()
+        else:
+            print("Invalid Input")
+    else:
+        print("Invaild Input")
+        
+print("---Random Numbers---")
+main()
