@@ -4,6 +4,9 @@ student = ""
 num = ""
 restart = ""
 
+def invalid():
+    print("Invalid Input")
+
 def again():
     restart = input("Restart?(y/n) ")
     if restart == "y":
@@ -11,7 +14,8 @@ def again():
     if restart == "n":
         main()
     else:
-        print("Invalid Input")
+        invalid()
+        again()
         
 def run():
     while True:
@@ -20,24 +24,34 @@ def run():
         global restart
         if student == "":
             student = int(input("Last Number? "))
-            num = ran.randint(1, student)
-            print(num)
+            num = ran.randint(1, int(student))
+            print("Picked Number:",num)
             again()
         if student != "":
             num = ran.randint(1, student)
-            print(num)
+            print("Picked Number:",num)
             again()
 
 def options():
-    print("Fix / Back")
+    print("Fix / Current / Back")
     b = input("")
     if b == "Fix":
         global student
         student = int(input("Fix Last Number: "))
         print("Last Number Fixed")
-        main()
+        options()
+    if b == "Current":
+        if student == "":
+            print("Last Number Is Not Set")
+            options()
+        if student != "":
+            print("Current Last Number:",student)
+            options()
     if b == "Back":
         main()
+    else:
+        invalid()
+        options()
     
 def main():
     print("Start / Options / Exit / 한국어")
@@ -54,11 +68,13 @@ def main():
         if c == "n":
             main()
         else:
-            print("Invalid Input")
+            invalid()
+            main()
     if a == "한국어":
         main_kor()
     else:
-        print("Invaild Input")
+        invalid()
+        main()
 
 def again_kor():
     restart = input("다시 뽑을까요?(예/아니오) ")
@@ -85,13 +101,20 @@ def run_kor():
             again_kor()
 
 def options_kor():
-    print("수정 / 뒤로가기")
+    print("수정 / 현황 / 뒤로가기")
     b = input("")
     if b == "수정":
         global student
         student = int(input("수정할 마지막 번호: "))
         print("수정되었습니다")
-        main_kor()
+        options_kor()
+    if b == "현황":
+        if student == "":
+            print("마지막 번호가 설정되어 있지 않습니다.")
+            options_kor()
+        if student != "":
+            print("현재 설정된 마지막 번호:",student)
+            options_kor()
     if b == "뒤로가기":
         main_kor()
 
