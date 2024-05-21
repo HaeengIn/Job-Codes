@@ -26,9 +26,9 @@ def main():
     print("Start / Options / Exit / 한국어")
     a = input()
     if a == "Start":
-        run_kor()
+        run()
     if a == "Options":
-        options_kor()
+        options()
     if a == "Exit":
         c = input("Exit Program?(y/n) ")
         if c == "y":
