@@ -21,6 +21,28 @@ def again():
         invalid()
         again()
 
+# 메인 실행
+def main():
+    print("Start / Options / Exit / 한국어")
+    a = input()
+    if a == "Start":
+        run_kor()
+    if a == "Options":
+        options_kor()
+    if a == "Exit":
+        c = input("Exit Program?(y/n) ")
+        if c == "y":
+            print("Program Stopped")
+            exit()
+        if c == "n":
+            main()
+        else:
+            invalid()
+    if a == "한국어":
+        main_kor()
+    else:
+        invalid()
+    
 # 랜덤 뽑기 실행
 def run():
     while True:
