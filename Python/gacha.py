@@ -1,10 +1,12 @@
 # random 함수 임포트
 import random as ran
+import re
 
 # 변수 선언
-student = ""
-num = ""
+student = 0
+num = 0
 restart = ""
+repeat = 0
 
 # Invaild Input 출력
 def invalid():
@@ -21,12 +23,25 @@ def again():
         invalid()
         again()
 
+# 다시 연속 뽑기 실행
+def again_stream():
+    restart = input("Restart?(y/n) ")
+    if restart == "y":
+        stream()
+    if restart == "n":
+        main()
+    else:
+        invalid()
+        again_stream()
+
 # 메인 실행
 def main():
-    print("Start / Options / Exit / 한국어")
+    print("Start / Stream / Options / Exit / 한국어")
     a = input()
     if a == "Start":
         run()
+    if a == "Stream":
+        stream()
     if a == "Options":
         options()
     if a == "Exit":
@@ -48,16 +63,35 @@ def run():
     while True:
         global student
         global num
-        global restart
         if student == "":
             student = int(input("Last Number? "))
-            num = ran.randint(1, int(student))
+            num = ran.randint(1, student)
             print("Picked Number:", num)
             again()
         if student != "":
             num = ran.randint(1, student)
             print("Picked Number:", num)
             again()
+
+# 연속 뽑기 실행
+def stream():
+    while True:
+        global student
+        global num
+        global repeat
+        if student == 0:
+            student = int(input("Last Number? "))
+            repeat = int(input("Repeat Number? "))
+            for x in range(repeat):
+                num = ran.randint(1, student)
+                print(num)
+            again_stream()
+        if student != 0:
+            repeat = int(input("Repeat Number? "))
+            for x in range(repeat):
+                num = ran.randint(1, student)
+                print(num)
+            again_stream()
 
 # 옵션 실행
 def options():
@@ -69,9 +103,14 @@ def options():
         print("Last Number Fixed")
         options()
     if b == "Current":
-        if student == "":
+        if student == 0:
             print("Last Number Is Not Set")
             options()
+        if student != 0:
+            print("Current Last Number:", student)
+            options()
+    if b == "Back":
+        main()
 
 # 다시 뽑기 실행
 def again_kor():
