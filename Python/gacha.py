@@ -63,12 +63,12 @@ def run():
     while True:
         global student
         global num
-        if student == "":
+        if student == 0:
             student = int(input("Last Number? "))
             num = ran.randint(1, student)
             print("Picked Number:", num)
             again()
-        if student != "":
+        if student != 0:
             num = ran.randint(1, student)
             print("Picked Number:", num)
             again()
@@ -122,23 +122,54 @@ def again_kor():
     else:
         print("잘못된 입력값입니다")
 
+# 다시 연속 뽑기 실행
+def again_stream_kor():
+    restart = input("다시 뽑을까요?(예/아니오) ")
+    if restart == "예":
+        stream_kor()
+    if restart == "아니오":
+        main_kor()
+    else:
+        invalid()
+        again_stream_kor()
+
 # 랜덤 뽑기 실행
 def run_kor():
     while True:
         global student
         global num
         global restart
-        if student == "":
+        if student == 0:
             student = int(input("마지막 번호를 입력해주세요: "))
             num = ran.randint(1, student)
             print(num)
             again_kor()
-        if student != "":
+        if student != 0:
             num = ran.randint(1, student)
             print(num)
             again_kor()
 
-# 옵션 실행행
+# 연속 뽑기 실행
+def stream_kor():
+    while True:
+        global student
+        global num
+        global repeat
+        if student == 0:
+            student = int(input("마지막 번호를 업력해주세요: "))
+            repeat = int(input("몇 번 뽑을까요? "))
+            for x in range(repeat):
+                num = ran.randint(1, student)
+                print(num)
+            again_stream_kor()
+        if student != 0:
+            repeat = int(input("몇 번 뽑을까요? "))
+            for x in range(repeat):
+                num = ran.randint(1, student)
+                print(num)
+            again_stream_kor()
+
+# 옵션 실행
 def options_kor():
     print("수정 / 현황 / 뒤로가기")
     b = input("")
@@ -148,10 +179,10 @@ def options_kor():
         print("수정되었습니다")
         options_kor()
     if b == "현황":
-        if student == "":
+        if student == 0:
             print("마지막 번호가 설정되어 있지 않습니다.")
             options_kor()
-        if student != "":
+        if student != 0:
             print("현재 설정된 마지막 번호:", student)
             options_kor()
     if b == "뒤로가기":
@@ -159,16 +190,18 @@ def options_kor():
 
 # 메인 실행
 def main_kor():
-    print("시작 / 옵션 / 나가기 / English")
+    print("시작 / 연속 뽑기 / 옵션 / 나가기 / English")
     a = input()
     if a == "시작":
         run_kor()
+    if a == "연속 뽑기":
+        stream_kor()
     if a == "옵션":
         options_kor()
     if a == "나가기":
         c = input("프로그램을 종료할까요?(예/아니오) ")
         if c == "예":
-            print("종료되었습니다")
+            print("종료되었습니다.")
             exit()
         if c == "아니오":
             main_kor()
