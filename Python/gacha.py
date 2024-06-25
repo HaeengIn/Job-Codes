@@ -1,6 +1,5 @@
 # random 함수 임포트
 import random as ran
-import re
 
 # 변수 선언
 student = 0
