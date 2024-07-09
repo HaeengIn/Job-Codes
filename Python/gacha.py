@@ -35,11 +35,11 @@ def again_stream():
 
 # 메인 실행
 def main():
-    print("Start / Stream / Options / Exit / 한국어")
+    print("Start / Repeat / Options / Exit / 한국어")
     a = input()
     if a == "Start":
         run()
-    if a == "Stream":
+    if a == "Repeat":
         stream()
     if a == "Options":
         options()
@@ -189,11 +189,11 @@ def options_kor():
 
 # 메인 실행
 def main_kor():
-    print("시작 / 연속 뽑기 / 옵션 / 나가기 / English")
+    print("시작 / 연속 / 옵션 / 나가기 / English")
     a = input()
     if a == "시작":
         run_kor()
-    if a == "연속 뽑기":
+    if a == "연속":
         stream_kor()
     if a == "옵션":
         options_kor()
