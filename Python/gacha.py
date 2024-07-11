@@ -7,10 +7,6 @@ num = 0
 restart = ""
 repeat = 0
 
-# Invaild Input 출력
-def invalid():
-    print("Invalid Input")
-
 # 다시 뽑기 실행
 def again():
     restart = input("Restart?(y/n) ")
@@ -19,7 +15,7 @@ def again():
     if restart == "n":
         main()
     else:
-        invalid()
+        print('Invalid Input')
         again()
 
 # 다시 연속 뽑기 실행
@@ -30,7 +26,7 @@ def again_stream():
     if restart == "n":
         main()
     else:
-        invalid()
+        print('Invalid Input')
         again_stream()
 
 # 메인 실행
@@ -51,11 +47,11 @@ def main():
         if c == "n":
             main()
         else:
-            invalid()
+            print('Invalid Input')
     if a == "한국어":
         main_kor()
     else:
-        invalid()
+        print('Invalid Input')
     
 # 랜덤 뽑기 실행
 def run():
@@ -129,7 +125,7 @@ def again_stream_kor():
     if restart == "아니오":
         main_kor()
     else:
-        invalid()
+        print('Invalid Input')
         again_stream_kor()
 
 # 랜덤 뽑기 실행
