@@ -1,5 +1,6 @@
-# random 함수 임포트
+# 모듈 임포트
 import random as ran
+import webbrowser as web
 
 # 변수 선언
 student = 0
@@ -31,7 +32,7 @@ def again_stream():
 
 # 메인 실행
 def main():
-    print("Start / Repeat / Options / Exit / 한국어")
+    print("Start / Repeat / Options / Help / Exit / 한국어")
     a = input()
     if a == "Start":
         run()
@@ -48,10 +49,13 @@ def main():
             main()
         else:
             print('Invalid Input')
+    if a == 'Help':
+        web.open_new_tab('https://haeengin.netlify.app/gahca_help.html')
     if a == "한국어":
         main_kor()
     else:
         print('Invalid Input')
+        main()
     
 # 랜덤 뽑기 실행
 def run():
@@ -106,6 +110,9 @@ def options():
             options()
     if b == "Back":
         main()
+    else:
+        print('Invalid Input')
+        options()
 
 # 다시 뽑기 실행
 def again_kor():
@@ -116,6 +123,7 @@ def again_kor():
         main_kor()
     else:
         print("잘못된 입력값입니다")
+        again_kor()
 
 # 다시 연속 뽑기 실행
 def again_stream_kor():
@@ -182,10 +190,13 @@ def options_kor():
             options_kor()
     if b == "뒤로가기":
         main_kor()
+    else:
+        print('잘못된 입력값입니다.')
+        options_kor()
 
 # 메인 실행
 def main_kor():
-    print("시작 / 연속 / 옵션 / 나가기 / English")
+    print("시작 / 연속 / 옵션 / 도움말 / 나가기 / English")
     a = input()
     if a == "시작":
         run_kor()
@@ -204,8 +215,11 @@ def main_kor():
             print("잘못된 입력값임니다")
     if a == "English":
         main()
+    if a == '도움말':
+        web.open_new_tab('https://haeengin.netlify.app/gacha_help.html')
     else:
         print("잘못된 입력값임니다")
+        main_kor()
 
 # 메인 실행
 print("---Random Numbers---")
