@@ -76,5 +76,4 @@ def main():
 
     print("\n프로그램을 종료합니다.")
 
-if __name__ == "__main__":
-    main()
+main()
