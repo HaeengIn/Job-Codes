@@ -1,7 +1,4 @@
-import sys
-
 def get_monthly_budget():
-    """사용자로부터 월간 예산을 입력받습니다."""
     while True:
         try:
             budget = float(input("한 달 예산을 입력해주세요 (숫자만): "))
@@ -13,7 +10,6 @@ def get_monthly_budget():
             print("잘못된 입력입니다. 숫자만 입력해주세요.")
 
 def get_daily_expenses(days_to_track):
-    """지정된 기간 동안의 일일 지출을 입력받습니다."""
     expenses = []
     print(f"\n{days_to_track}일 동안의 일일 지출을 입력해주세요.")
     for day in range(1, days_to_track + 1):
@@ -30,7 +26,6 @@ def get_daily_expenses(days_to_track):
     return expenses
 
 def analyze_and_forecast(expenses, monthly_budget):
-    """지출 내역을 분석하고 월간 지출을 예측합니다."""
     if not expenses:
         print("입력된 지출 내역이 없습니다.")
         return
@@ -38,8 +33,6 @@ def analyze_and_forecast(expenses, monthly_budget):
     days_tracked = len(expenses)
     total_spent = sum(expenses)
     average_daily_spending = total_spent / days_tracked
-
-    # 한 달을 30일로 가정하여 예측
     forecasted_monthly_spending = average_daily_spending * 30
 
     print("\n--- 지출 분석 및 예측 결과 ---")
@@ -63,7 +56,6 @@ def analyze_and_forecast(expenses, monthly_budget):
         print(f"이대로라면 월말에 약 {remaining_amount:,.0f}원이 남을 것으로 예상됩니다.")
 
 def main():
-    """프로그램의 메인 로직을 실행합니다."""
     print("--- 일일 지출 패턴 분석 및 월간 지출 예측 프로그램 ---")
     print("최근 지출 내역(수열)을 바탕으로 한 달 지출을 예측하고 분석합니다.\n")
 
@@ -86,4 +78,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
