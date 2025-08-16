@@ -1,18 +1,19 @@
-def get_monthly_budget():
+def inputBudget():
     while True:
         try:
-            budget = float(input("한 달 예산을 입력해주세요 (숫자만): "))
+            print('\n한 달 예산을 입력해주세요.')
+            budget = float(input('> '))
             if budget > 0:
                 return budget
             else:
                 print("예산은 0보다 커야 합니다. 다시 입력해주세요.")
         except ValueError:
-            print("잘못된 입력입니다. 숫자만 입력해주세요.")
+            print("유효하지 않은 입력입니다. 숫자를 입력해주세요.")
 
-def get_daily_expenses(days_to_track):
+def analyzeExpenses(daysToAnalyze):
     expenses = []
-    print(f"\n{days_to_track}일 동안의 일일 지출을 입력해주세요.")
-    for day in range(1, days_to_track + 1):
+    print(f'\n{daysToAnalyze}일 동안의 지출을 입력해주세요.')
+    for day in range(1, daysToAnalyze + 1):
         while True:
             try:
                 expense = float(input(f"{day}일차 지출: "))
@@ -22,58 +23,57 @@ def get_daily_expenses(days_to_track):
                 else:
                     print("지출은 0 이상이어야 합니다. 다시 입력해주세요.")
             except ValueError:
-                print("잘못된 입력입니다. 숫자만 입력해주세요.")
+                print("유효하지 않은 입력입니다. 숫자를 입력해주세요.")
     return expenses
 
-def analyze_and_forecast(expenses, monthly_budget):
+def analyze(expenses, budget):
     if not expenses:
         print("입력된 지출 내역이 없습니다.")
         return
 
-    days_tracked = len(expenses)
-    total_spent = sum(expenses)
-    average_daily_spending = total_spent / days_tracked
-    forecasted_monthly_spending = average_daily_spending * 30
+    days = len(expenses)
+    totalInputExpenses = sum(expenses)
+    averageExpenses = totalInputExpenses / days
+    """
+    등차수열 일반항 공식: a_n = a + (n-1)d
+    첫째항: totalInputExpenses
+    공차: averageExpenses
+    30째 항: a_30 = totalInputExpenses + 29 * averageExpenses
+    한 달: 30일
 
-    print("\n--- 지출 분석 및 예측 결과 ---")
-    print(f"추적 기간: {days_tracked}일")
-    print(f"총 지출: {total_spent:,.0f}원")
-    print(f"일 평균 지출: {average_daily_spending:,.0f}원")
-    print(f"월간 예상 지출 (30일 기준): {forecasted_monthly_spending:,.0f}원")
-    print(f"설정한 월간 예산: {monthly_budget:,.0f}원")
+    첫째항 ~ 30째항 모두 더하기: (totalInputExpenses + a_30) / 2
+    """
+    totalExpenses = (totalInputExpenses + (totalInputExpenses + 29 * averageExpenses)) / 2
 
-    if forecasted_monthly_spending > monthly_budget:
-        overspent_amount = forecasted_monthly_spending - monthly_budget
-        print(f"\n[경고] 이 소비 패턴을 유지하면 예산을 {overspent_amount:,.0f}원 초과할 것으로 보입니다.")
-        print("지출을 줄이는 것을 고려해보세요.")
-    elif forecasted_monthly_spending < monthly_budget * 0.8:
-        remaining_amount = monthly_budget - forecasted_monthly_spending
-        print(f"\n[안정] 아주 좋습니다! 예산 내에서 안정적으로 소비하고 있습니다.")
-        print(f"이대로라면 월말에 약 {remaining_amount:,.0f}원을 아낄 수 있습니다.")
-    else:
-        remaining_amount = monthly_budget - forecasted_monthly_spending
-        print(f"\n[양호] 예산에 맞게 잘 소비하고 있습니다.")
-        print(f"이대로라면 월말에 약 {remaining_amount:,.0f}원이 남을 것으로 예상됩니다.")
+    print(f"\n예산: {budget}원")
+    print(f'입력한 지출의 일 수: {days}일')
+    print(f"총 지출: {totalInputExpenses}원")
+    print(f'평균 지출: {averageExpenses}원')
+    print(f'월간 예상 지출: {totalExpenses}원')
+
+    if totalExpenses > budget:
+        print(f'\n현재 상태: 위험\n월간 예상 지출이 예산을 {totalExpenses - budget}원 초과할 것으로 예상됩니다.\n일일 지출을 줄이는 것을 고려해보세요.')
+    elif totalExpenses < budget:
+        print(f'\n현재 상태: 양호\n월간 예상 지출이 예산보다 {budget - totalExpenses}원 적을 것으로 예상됩니다.\n현재의 소비 습관을 유지하셔도 좋습니다.')
 
 def main():
     print("--- 일일 지출 패턴 분석 및 월간 지출 예측 프로그램 ---")
-    print("최근 지출 내역(수열)을 바탕으로 한 달 지출을 예측하고 분석합니다.\n")
 
-    monthly_budget = get_monthly_budget()
+    budget = inputBudget()
 
     while True:
         try:
-            days_to_track = int(input("\n며칠 동안의 지출을 분석할까요? (예: 7): "))
-            if days_to_track > 0:
+            print('\n분석할 지출의 일 수를 입력해주세요. (3 이상 7 이하)')
+            daysToAnalyze = int(input('> '))
+            if 3 <= daysToAnalyze <= 7:
                 break
             else:
-                print("분석할 날짜는 1일 이상이어야 합니다.")
+                print("잘못된 입력입니다. 3 이상 7 이하의 숫자를 입력해주세요.")
         except ValueError:
-            print("잘못된 입력입니다. 숫자만 입력해주세요.")
+            print("유효하지 않은 입력입니다. 숫자를 입력해주세요.")
 
-    daily_expenses = get_daily_expenses(days_to_track)
-    analyze_and_forecast(daily_expenses, monthly_budget)
+    expenses = analyzeExpenses(daysToAnalyze)
+    analyze(expenses, budget)
 
-    print("\n프로그램을 종료합니다.")
-
-main()
+if __name__ == "__main__":
+    main()
