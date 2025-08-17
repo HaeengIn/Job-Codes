@@ -1,3 +1,4 @@
+# 사용자에게 한 달 예산을 입력 받는 함수
 def inputBudget():
     while True:
         try:
@@ -10,7 +11,9 @@ def inputBudget():
         except ValueError:
             print("유효하지 않은 입력입니다. 숫자를 입력해주세요.")
 
+# 사용자가 입력한 일 수 만큼의 지출을 입력 받는 함수
 def analyzeExpenses(daysToAnalyze):
+    # 입력 받을 일일 지출을 저장하기 위한 리스트 생성
     expenses = []
     print(f'\n{daysToAnalyze}일 동안의 지출을 입력해주세요.')
     for day in range(1, daysToAnalyze + 1):
@@ -26,7 +29,9 @@ def analyzeExpenses(daysToAnalyze):
                 print("유효하지 않은 입력입니다. 숫자를 입력해주세요.")
     return expenses
 
+# 총 지출, 평균 지출, 월간 예상 지출을 계산하고 예산과 비교하여 상태를 출력하는 함수
 def analyze(expenses, budget):
+    # 입력된 지출이 없을 때 실행
     if not expenses:
         print("입력된 지출 내역이 없습니다.")
         return
@@ -34,6 +39,7 @@ def analyze(expenses, budget):
     days = len(expenses)
     totalInputExpenses = sum(expenses)
     averageExpenses = totalInputExpenses / days
+
     """
     등차수열 일반항 공식: a_n = a + (n-1)d
     첫째항: totalInputExpenses
@@ -56,6 +62,7 @@ def analyze(expenses, budget):
     elif totalExpenses < budget:
         print(f'\n현재 상태: 양호\n월간 예상 지출이 예산보다 {budget - totalExpenses}원 적을 것으로 예상됩니다.\n현재의 소비 습관을 유지하셔도 좋습니다.')
 
+# 분석할 지출의 일 수를 입력받고 입력 받은 일 수를 기반으로 함수를 실행하여 예측 프로그램 가동
 def main():
     print("--- 일일 지출 패턴 분석 및 월간 지출 예측 프로그램 ---")
 
